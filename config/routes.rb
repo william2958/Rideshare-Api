@@ -37,5 +37,5 @@ Rails.application.routes.draw do
 	# Handle the user forgetting passwords
 	post 'forgot_password', to: 'user#forgot_password'
 	post 'change_password', to: 'user#password_reset'
-
+ 
 end
