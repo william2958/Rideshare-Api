@@ -139,7 +139,7 @@ production:
         - split-shard-00-02-6sn35.mongodb.net:27017
       options:
         # The name of the user for authentication.
-        user: william2958@admin
+        user: splitmanager
 
         # The password of the user for authentication.
         password: ENV['admin_password']
