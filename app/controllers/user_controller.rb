@@ -55,6 +55,8 @@ class UserController < ApplicationController
 
 			if @user
 				# If successfully created
+				UserMailer.welcome_email(@user).deliver_later
+				nil
 				render json: {
 					status: 'success',
 					user: @user
@@ -67,8 +69,6 @@ class UserController < ApplicationController
 					message: 'Missing a field!'
 				}, status: 422
 			end
-
-		 	UserMailer.welcome_email(@user).deliver_now
 		 	
 		end
 	    

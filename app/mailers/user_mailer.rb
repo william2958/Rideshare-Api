@@ -7,6 +7,7 @@ class UserMailer < ApplicationMailer
 	def welcome_email(user)
 		@user = user
 		mail(to: @user.email, subject: 'Welcome to Friday.')
+		nil
 	end
 
 	# Send the for got password email with the reset link
@@ -14,6 +15,7 @@ class UserMailer < ApplicationMailer
 	def forgot_password(user)
 		@user = user
 		mail(to: @user.email, subject: 'Reset Password')
+		nil
 	end
 
 end
