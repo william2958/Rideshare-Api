@@ -113,14 +113,43 @@ test:
           mode: :primary
         max_pool_size: 1
 
+# production:
+#     clients:
+#         default:
+#             uri: <%= ENV['MONGODB_URI'] %> 
+#             options:
+#                 connect_timeout: 15
+#     options:
+#         raise_not_found_error: false
+
 production:
-    clients:
-        default:
-            uri: <%= ENV['MONGODB_URI'] %> 
-            options:
-                connect_timeout: 15
-    options:
-        raise_not_found_error: false
+  # Configure available database clients. (required)
+  clients:
+    # Defines the default client. (required)
+    default:
+      # Defines the name of the default database that Mongoid can connect to.
+      # (required).
+      database: splitprimarydatabase
+
+      # Provides the hosts the default client can connect to. Must be an array
+      # of host:port pairs. (required)
+      hosts:
+        - split-shard-00-00-6sn35.mongodb.net:27017
+        - split-shard-00-01-6sn35.mongodb.net:27017
+        - split-shard-00-02-6sn35.mongodb.net:27017
+      options:
+        # The name of the user for authentication.
+        user: william2958
+
+        # The password of the user for authentication.
+        password: ENV['admin_password']
+
+        # The database or source to authenticate the user against. If the database
+        # specified above is not admin, admin MUST be specified here.
+        auth_source: admin
+
+        # All Atlas servers use SSL. (default: false)
+        ssl: true
 
 # Configure Mongoid specific options. (optional)
 # options:
