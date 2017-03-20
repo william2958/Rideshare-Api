@@ -116,7 +116,7 @@ test:
 production:
     clients:
         default:
-            uri: <%= ENV['MONGODB_URI'] %> 
+            uri: <%= ENV['MONGOLAB_URI'] %> 
             options:
                 connect_timeout: 15
     options:
