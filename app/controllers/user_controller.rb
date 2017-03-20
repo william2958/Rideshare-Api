@@ -55,7 +55,7 @@ class UserController < ApplicationController
 
 			if @user
 				# If successfully created
-				UserMailer.welcome_email(@user).deliver_later
+				UserMailer.welcome_email(@user.to_json).deliver_later
 				nil
 				render json: {
 					status: 'success',
