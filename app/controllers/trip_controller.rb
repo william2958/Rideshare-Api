@@ -60,6 +60,7 @@ class TripController < ApplicationController
 				@accepted_user = User.find_by(_id: user_index)
 				@accepted_user.trips_accepted.delete(trip_params[:trip_id])
 				@accepted_user.save!
+				UserMailer.cancelled_trip(@accepted_user).deliver_now
 			end
 			@trip.user_requests.each do |user_index|
 				@requested_user = User.find_by(_id: user_index)
@@ -409,6 +410,7 @@ class TripController < ApplicationController
 			@accepted_user.trips_accepted << @trip.id.to_s
 			@trip.save!
 			@accepted_user.save!
+			UserMailer.accepted_email(@accepted_user).deliver_now
 			render json: {
 				status: 'success',
 				trip: @trip
