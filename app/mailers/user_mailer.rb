@@ -18,4 +18,16 @@ class UserMailer < ApplicationMailer
 		nil
 	end
 
+	def cancelled_trip(user) 
+		@user = user
+		mail(to: @user.email, subject: 'Trip Cancelled')
+		nil
+	end
+
+	def accepted_email(user)
+		@user = user
+		mail(to: @user.email, subject: 'Request Accepted')
+		nil
+	end
+
 end

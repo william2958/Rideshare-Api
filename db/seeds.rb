@@ -13,10 +13,10 @@ User.create!([
 	{
 	  "_id": "user0",
 	  "car_model": nil,
-	  "confirm_token": "",
+	  "confirm_token": "123",
 	  "driver_rating": 3.5,
 	  "email": "william2958@gmail.com",
-	  "email_confirmed": true,
+	  "email_confirmed": false,
 	  "facebook_link": "https://www.facebook.com/william.huang.7737",
 	  "first_name": "William",
 	  "first_time": true,

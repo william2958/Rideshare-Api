@@ -55,7 +55,7 @@ class UserController < ApplicationController
 
 			if @user
 				# If successfully created
-				UserMailer.welcome_email(@user.to_json).deliver_later
+				UserMailer.welcome_email(@user).deliver_now
 				nil
 				render json: {
 					status: 'success',
@@ -106,7 +106,7 @@ class UserController < ApplicationController
 			render json: {
 				status: 'success',
 				message: "Account with uid #{@resource.uid} has been destroyed."
-			}
+			}, status: 200
 		else
 			render json: {
 				status: 'error',
@@ -126,7 +126,7 @@ class UserController < ApplicationController
 			render json: {
 				status: 'success',
 				message: 'Account successfully confirmed!'
-			}  
+			}, status: 200
 		else
 			render json: {
 				status: 'error',

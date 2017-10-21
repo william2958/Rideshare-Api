@@ -9,7 +9,7 @@ class TripController < ApplicationController
 
 	# Create a trip
 	def create
-		if User.find_by(_id: trip_params[:driver]) && trip_params[:driver] === current_user.id && !Trip.find_by(trip_params) && current_user.trips_driving.size < 2
+		if User.find_by(_id: trip_params[:driver]) && trip_params[:driver] == current_user.id.to_s && !Trip.find_by(trip_params) && current_user.trips_driving.size < 2
 			@trip = Trip.create!(trip_params)
 			# Add this trip to the user's posted listings
 			current_user.trips_driving << @trip.id.to_s
@@ -21,7 +21,7 @@ class TripController < ApplicationController
 			@trip.save!
 			current_user.save!
 		else
-			if trip_params[:driver] != current_user.id
+			if trip_params[:driver] != current_user.id.to_s
 				render json: {
 					status: 'error',
 					message: 'User is either not the driver!'
@@ -60,6 +60,7 @@ class TripController < ApplicationController
 				@accepted_user = User.find_by(_id: user_index)
 				@accepted_user.trips_accepted.delete(trip_params[:trip_id])
 				@accepted_user.save!
+				UserMailer.cancelled_trip(@accepted_user).deliver_now
 			end
 			@trip.user_requests.each do |user_index|
 				@requested_user = User.find_by(_id: user_index)
@@ -125,7 +126,7 @@ class TripController < ApplicationController
 	# Requires trip id and signed in user
 	def get_authorized_trip
 		@trip = Trip.find_by(_id: trip_params[:trip_id])
-		if @trip && @trip.accepted_users.include?(current_user.id)
+		if @trip && @trip.accepted_users.include?(current_user.id.to_s)
 			@user_requests = User.where(:_id.in => @trip.user_requests).map { |user|
 				user = {
 					_id: user.id,
@@ -272,16 +273,15 @@ class TripController < ApplicationController
 		# then turning it into a datetime object
 		@date = Time.at(trip_params[:date].to_i / 1000).to_datetime
 		puts "\n\n"
-		puts "Date accepted: ", @date
-		puts "Date accepted in epoch", DateTime.parse(@date.to_s).to_time.to_i
-		puts "Date bottom bound: ", DateTime.parse(@date.to_s).to_time.to_i - (3.days+1)
-		puts "Date bottom bound difference: ", 3.days
-		puts "Date Upper bound: ", DateTime.parse(@date.to_s).to_time.to_i + (5.days-1)
-		puts "Current date: ", DateTime.now.strftime('%s')
 		@searched_epoch_time = DateTime.parse(@date.to_s).to_time.to_i
 		@current_epoch_time = DateTime.now.strftime('%s').to_i
+		puts "Searched epoch time: ", @searched_epoch_time
+		puts "Current epoch time: ", @current_epoch_time
+		puts ((@searched_epoch_time-@current_epoch_time) > -86400)
+		puts (@searched_epoch_time-@current_epoch_time)
+		puts (-200 > -86400)
 		# Check that the date is after today
-		if ((@searched_epoch_time-@current_epoch_time) > -86400)
+		if ((@searched_epoch_time-@current_epoch_time) > -104000)
 			# Fetch results up to five days later
 			@results = Trip.where(
 				from_city: trip_params[:from_location], 
@@ -314,7 +314,7 @@ class TripController < ApplicationController
 		else
 			render json: {
 				status: 'error',
-				message: 'The date provided must be after today!'
+				message: 'The search date must be after today!'
 			}, status: 422
 		end
 	end
@@ -327,7 +327,7 @@ class TripController < ApplicationController
 		# That the user has not already requested this trip
 		# and that the trip has available spaces and that the driver is not the requestor
 		if current_user.trips_requested.size <= 5 && 
-			!(@trip.user_requests.include?(current_user._id)) && @trip.spaces > 0 && @trip.driver != current_user.id && !(current_user.trips_accepted.include?(@trip.id))
+			!(@trip.user_requests.include?(current_user._id)) && @trip.spaces > 0 && @trip.driver != current_user.id.to_s && !(current_user.trips_accepted.include?(@trip.id))
 
 			@trip.user_requests << current_user._id
 			current_user.trips_requested << @trip._id.to_s
@@ -354,7 +354,7 @@ class TripController < ApplicationController
 					status: 'error',
 					message: 'There is no more space in this trip!'
 				}, status: 422
-			elsif @trip.driver == current_user.id
+			elsif @trip.driver == current_user.id.to_s
 				render json: {
 					status: 'error',
 					message: 'You cannot request your own trip!'
@@ -382,7 +382,7 @@ class TripController < ApplicationController
 		# Check that the trip's driver is the current user and that the user being accepted has 
 		# Actually requested the trip and that they have not already been accepted
 		# And that there is still space available
-		if (@trip.driver == current_user.id) && (@trip.user_requests.include?(@accepted_user.id)) && !(@trip.accepted_users.include?(@accepted_user.id)) && @trip.spaces > 0
+		if (@trip.driver == current_user.id.to_s) && (@trip.user_requests.include?(@accepted_user.id)) && !(@trip.accepted_users.include?(@accepted_user.id)) && @trip.spaces > 0
 			# Remove the user from the trip's request users array  into the accepted user array
 			@trip.user_requests.delete(@accepted_user.id)
 			@trip.accepted_users << @accepted_user.id
@@ -409,12 +409,13 @@ class TripController < ApplicationController
 			@accepted_user.trips_accepted << @trip.id.to_s
 			@trip.save!
 			@accepted_user.save!
+			UserMailer.accepted_email(@accepted_user).deliver_now
 			render json: {
 				status: 'success',
 				trip: @trip
 			}, status: 200
 		else
-			if !(@trip.driver == current_user.id)
+			if !(@trip.driver == current_user.id.to_s)
 				render json: {
 					status: 'error',
 					message: 'You cannot accept this request because you are not the driver!'

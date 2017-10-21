@@ -20,7 +20,7 @@ class AuthenticationController < ApplicationController
 					# Return the authorization token back to the user
 					# Which was returned by JWT
 					render json: { 
-						id: @user.id,
+						id: @user.id.to_s,
 						first_name: @user.first_name,
 						last_name: @user.last_name,
 						auth_token: command.result,

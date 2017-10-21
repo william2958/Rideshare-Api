@@ -1,4 +1,14 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="x-apple-disable-message-reformatting"><title>Welcome to F.R.I.D.A.Y.</title><style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title>Welcome to Apollo</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+    
+    <!-- CSS Reset -->
+    <style>
 
         /* What it does: Remove spaces around the email design added by some email clients. */
         /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
@@ -97,7 +107,10 @@
           box-shadow: 4px 4px 15px #bbb;
         }
     
-    </style><style>
+    </style>
+    
+    <!-- Progressive Enhancements -->
+    <style>
         
         /* What it does: Hover styles for buttons */
         .button-td,
@@ -106,8 +119,143 @@
         }
         .button-td:hover,
         .button-a:hover {
-            background: #1386b2 !important;
-            border-color: #1386b2 !important;
+            background: #2E7D32 !important;
+            border-color: #2E7D32 !important;
         }
 
-    </style></head><body width="100%" bgcolor="#222222" style="margin: 0; mso-line-height-rule: exactly;"><center style="width: 100%; background: #222222;"><div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;"> Welcome to F.R.I.D.A.Y.</div><div style="max-width: 600px; margin: auto;" class="email-container"><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;"><tr><td bgcolor="#ffffff"> <img src="https://assistantfriday.com/images/welcome-email-banner.jpg" width="600" height="" alt="alt_text" border="0" align="center" style="width: 100%; max-width: 600px; height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;"></td></tr><tr><td bgcolor="#ffffff"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td style="padding: 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;"><h2>Welcome to F.R.I.D.A.Y.</h2><p>Thanks for signing up for F.R.I.D.A.Y. <%=@user.first_name%>! F.R.I.D.A.Y. is our web assistant that helps manage your online data safely and securely.</p><p>Please confirm your email by clicking the link below.</p><br><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto;"><tr><td style="border-radius: 3px; background: #41ADD8; text-align: center;" class="button-td"> <a href="https://assistantfriday.com/confirm_email/<%=@user.confirm_token%>" style="background: #41ADD8; border: 15px solid #41ADD8; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a"><span style="color:#ffffff;" class="button-link">&nbsp;&nbsp;&nbsp;&nbsp;Confirm Email&nbsp;&nbsp;&nbsp;&nbsp;</span></a></td></tr></table><br><hr><br><p>You can find out more about how F.R.I.D.A.Y. works below.</p></td></tr></table></td></tr><tr><td bgcolor="#ffffff" align="center" height="100%" valign="top" width="100%" style="padding-bottom: 40px"><table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:560px;"><tr><td align="center" valign="top" width="50%"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;"><tr><td style="text-align: center; padding: 0 10px;"> <a href="https://assistantfriday.com/about#pin_jump_to"><img src="https://assistantfriday.com/images/welcome-email-pin.jpg" width="200" height="" alt="alt_text" border="0" align="center" style="width: 100%; max-width: 200px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;"></a></td></tr><tr><td style="text-align: center;font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px 10px 0;" class="stack-column-center"><h4>Your PIN</h4> Find out why we require you to have a pin and see how it helps keep your information secure from hackers.</td></tr></table></td><td align="center" valign="top" width="50%"><table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px;text-align: left;"><tr><td style="text-align: center; padding: 0 10px;"> <a href="https://assistantfriday.com/about#security_jump_to"><img src="https://assistantfriday.com/images/welcome-email-security.jpg" width="200" height="" alt="alt_text" border="0" align="center" style="width: 100%; max-width: 200px; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;"></a></td></tr><tr><td style="text-align: center;font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; padding: 10px 10px 0;" class="stack-column-center"><h4>Security</h4> Learn about how F.R.I.D.A.Y. uses strong AES-256 encryption methods to keep your data safe.</td></tr></table></td></tr></table></td></tr></table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;"><tr><td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; line-height:18px; text-align: center; color: #888888;" class="x-gmail-data-detectors"><webversion style="color:#cccccc; text-decoration:underline; font-weight: bold;">View as a Web Page</webversion><br><br> F.R.I.D.A.Y.<br>221b, Baker Street, London, NW1 6XE UK<br><br></td></tr></table> <!--[if mso]></td></tr></table><![endif]--></div></center></body></html>
+        .split-header {
+            height: 30px;
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 10px;
+            background-color: #9CCC65;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .split-header > td {
+            padding-top: 25px;
+            padding-bottom: 25px;
+            font-family: helvetica;
+            color: white;
+            letter-spacing: 3px;
+        }
+
+    </style>
+
+</head>
+<body width="100%" bgcolor="#9CCC65" style="margin: 0; mso-line-height-rule: exactly;">
+    <center style="width: 100%; background: #222222;">
+
+        <!-- Visually Hidden Preheader Text : BEGIN -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+            Welcome to Apollo
+        </div>
+        <!-- Visually Hidden Preheader Text : END -->
+
+        <!--    
+            Set the email width. Defined in two places:
+            1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 600px.
+            2. MSO tags for Desktop Windows Outlook enforce a 600px width.
+        -->
+        <div style="max-width: 600px; margin: auto;" class="email-container">
+            <!--[if mso]>
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
+            <tr>
+            <td>
+            <![endif]-->
+            
+            <!-- Email Body : BEGIN -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+                
+                <!-- Hero Image, Flush : BEGIN -->
+                <tr class="split-header">
+                    <td bgcolor="#9CCC65">
+                        Apollo
+                    </td>
+                </tr>
+                <!-- Hero Image, Flush : END -->
+
+                <!-- 1 Column Text + Button : BEGIN -->
+                <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td style="padding: 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+
+                                    <h2>Welcome to Apollo</h2>
+
+                                    <p>Thanks for signing up for Apollo, the easiest way to find rides from city to city</p>
+                                    <p>Please confirm your email by clicking the link below.</p>
+
+                                    <br>
+                                    <!-- Button : Begin -->
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto;">
+                                        <tr>
+                                            <td style="border-radius: 3px; background: #4CAF50; text-align: center;" class="button-td">
+                                                <a href="https://apollorides.com/confirm_email/<%=@user.confirm_token%>" style="background: #4CAF50; border: 15px solid #4CAF50; font-family: sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
+                                                    <span style="color:#ffffff;" class="button-link">&nbsp;&nbsp;&nbsp;&nbsp;Confirm Email&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- Button : END -->
+                                    <br>
+                                    <!-- <hr> -->
+                                    <br>
+                                </td>
+                                </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- 1 Column Text + Button : BEGIN -->
+               
+               
+
+                <!-- Clear Spacer : BEGIN -->
+                <!-- <tr>
+                    <td height="40" style="font-size: 0; line-height: 0;">
+                        &nbsp;
+                    </td>
+                </tr> -->
+                <!-- Clear Spacer : END -->
+
+                <!-- 1 Column Text + Button : BEGIN -->
+               <!--  <tr>
+                    <td bgcolor="#ffffff">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td style="padding: 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;">
+                                    Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent laoreet malesuada cursus. Maecenas scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut&nbsp;erat.
+                                </td>
+                                </tr>
+                        </table>
+                    </td>
+                </tr> -->
+                <!-- 1 Column Text + Button : BEGIN -->
+
+            </table>
+            <!-- Email Body : END -->
+          
+            <!-- Email Footer : BEGIN -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
+                <tr>
+                    <td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; line-height:18px; text-align: center; color: #888888;" class="x-gmail-data-detectors">
+                        <webversion style="color:#cccccc; text-decoration:underline; font-weight: bold;">View as a Web Page</webversion>
+                        <br><br>
+                        Split<br>221b, Baker Street, London, NW1 6XE UK<br>
+                        <br>
+                    </td>
+                </tr>
+            </table>
+            <!-- Email Footer : END -->
+
+            <!--[if mso]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </div>
+    </center>
+</body>
+</html>
