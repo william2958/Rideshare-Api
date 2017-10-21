@@ -1,24 +1,3 @@
-# README
+# Ruby-on-Rails server for the ApolloRides application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This handles all requests using JWT tokens and has complete authorization capabilities. Interacts with a MongoDB database in the cloud.
